@@ -1,74 +1,72 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev';
 
-const dirApp = path.join(__dirname, 'app')
-const dirAssets = path.join(__dirname, 'assets')
-const dirStyles = path.join(__dirname, 'styles')
-const dirNode = 'node_modules'
+const dirApp = path.join(__dirname, 'app');
+const dirAssets = path.join(__dirname, 'assets');
+const dirStyles = path.join(__dirname, 'styles');
+const dirNode = 'node_modules';
 
 module.exports = {
-  entry: [
-    path.join(dirApp, 'index.js'),
-    path.join(dirStyles, 'index.scss')
-  ],
+  entry: {
+    main: [path.join(dirApp, 'index.ts'), path.join(dirStyles, 'index.scss')],
+    'service-worker': path.join(dirApp, 'service-worker.ts'),
+  },
 
   resolve: {
     modules: [
       dirApp,
       dirAssets,
-      dirNode
-    ]
+      dirNode,
+    ],
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      IS_DEVELOPMENT
-    }),
-
-    new webpack.ProvidePlugin({
-
+      IS_DEVELOPMENT,
     }),
 
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: './app/service-worker.js',
-          to: ''
-        },
-        {
           from: './offline.html',
-          to: ''
+          to: '',
         },
         {
           from: './shared',
-          to: ''
-        }
+          to: '',
+        },
       ],
     }),
 
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
-    })
+      chunkFilename: '[id].css',
+    }),
   ],
 
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        use: ['ts-loader'],
+        exclude: /node_modules/,
+      },
+
+      {
         test: /\.pug$/,
-        use: ['pug-loader']
+        use: ['pug-loader'],
       },
 
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
 
       {
@@ -77,51 +75,51 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: ''
-            }
+              publicPath: '',
+            },
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: false
-            }
+              sourceMap: false,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: false
-            }
+              sourceMap: false,
+            },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: false
-            }
-          }
-        ]
+              sourceMap: false,
+            },
+          },
+        ],
       },
 
       {
         test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
         loader: 'file-loader',
         options: {
-          name (file) {
-            return '[hash].[ext]'
-          }
-        }
+          name() {
+            return '[hash].[ext]';
+          },
+        },
       },
 
       {
         test: /\.(glsl|frag|vert)$/,
         loader: 'raw-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
 
       {
         test: /\.(glsl|frag|vert)$/,
         loader: 'glslify-loader',
-        exclude: /node_modules/
-      }
-    ]
-  }
-}
+        exclude: /node_modules/,
+      },
+    ],
+  },
+};
