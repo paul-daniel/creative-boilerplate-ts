@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\" \"npm run browsersync\" ",
-    "browsersync": "node browserSync.js",
+    "browsersync": "ts-node browserSync.ts",
     "backend:build": "tsc && node dist/server.js",
     "backend:development": "nodemon server/server.ts",
     "frontend:build": "webpack --progress --config webpack.config.build.ts",
