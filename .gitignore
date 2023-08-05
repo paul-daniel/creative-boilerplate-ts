@@ -11,6 +11,7 @@ dist/
 # Files.
 result.xml
 npm-debug.log
+TODO
 
 # Env.
 .env

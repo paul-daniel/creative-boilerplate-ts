@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\"",
-    "backend:build": "node app.js",
-    "backend:development": "nodemon app.js",
+    "backend:build": "tsc && node dist/server.js",
+    "backend:development": "nodemon server/server.ts",
     "frontend:build": "webpack --progress --config webpack.config.build.ts",
     "frontend:development": "cross-env NODE_ENV=dev webpack serve --progress --config webpack.config.development.ts",
     "lint": "eslint *.js",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/paul-daniel/creative-boilerplate-ts#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@types/express": "^4.17.17",
     "@types/lodash": "^4.14.196",
     "@types/node": "^20.4.7",
     "@types/webpack": "^5.28.1",
@@ -43,7 +44,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "dat.gui": "^0.7.7",
-    "dotenv": "^8.2.0",
     "eslint": "^8.46.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.10.0",
@@ -83,24 +83,25 @@
   "dependencies": {
     "autoprefixer": "^10.2.4",
     "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "cssnano": "^4.1.10",
+    "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "method-override": "^3.0.0",
+    "mini-css-extract-plugin": "^2.7.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "prettier": "^3.0.1",
     "prismic-dom": "^2.2.4",
     "prismic-javascript": "^3.0.2",
     "pug": "^3.0.2",
-    "clean-webpack-plugin": "^4.0.0",
-    "webpack-merge": "^5.7.3",
     "request": "^2.88.2",
     "staticify": "^5.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "ua-parser-js": "^0.7.23",
     "webpack": "^5.19.0",
-    "ua-parser-js": "^0.7.23"
+    "webpack-merge": "^5.7.3"
   }
 }

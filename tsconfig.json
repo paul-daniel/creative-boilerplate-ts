@@ -11,10 +11,9 @@
     "skipLibCheck": true,                       // Skip type checking of declaration files
     "forceConsistentCasingInFileNames": true,   // Disallow inconsistent casing in file names
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
   },
-  "include": [
-    "app/**/*.ts"                               // Files to be included in the compilation
+  "include": [                              // Files to be included in the compilation
+    "server/**/*.ts"
   ],
   "exclude": [
     "node_modules"                              // Folders to be excluded from the compilation
