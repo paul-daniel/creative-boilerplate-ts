@@ -7,8 +7,8 @@
     "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\"",
     "backend:build": "node app.js",
     "backend:development": "nodemon app.js",
-    "frontend:build": "webpack --progress --config webpack.config.build.js",
-    "frontend:development": "cross-env NODE_ENV=dev webpack serve --progress --config webpack.config.development.js",
+    "frontend:build": "webpack --progress --config webpack.config.build.ts",
+    "frontend:development": "cross-env NODE_ENV=dev webpack serve --progress --config webpack.config.development.ts",
     "lint": "eslint *.js",
     "test": "node -c *.js"
   },
@@ -26,6 +26,9 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@types/lodash": "^4.14.196",
+    "@types/node": "^20.4.7",
+    "@types/webpack": "^5.28.1",
+    "@types/webpack-dev-server": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "auto-bind": "^4.0.0",
@@ -35,10 +38,8 @@
     "babel-loader": "^8.2.2",
     "browser-sync": "^2.26.14",
     "browser-sync-webpack-plugin": "^2.3.0",
-    "clean-webpack-plugin": "^4.0.0",
     "cname-webpack-plugin": "^3.0.0",
     "concurrently": "^5.3.0",
-    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "dat.gui": "^0.7.7",
@@ -60,7 +61,6 @@
     "gsap": "^3.6.0",
     "html-webpack-plugin": "^4.5.1",
     "include-media": "^1.4.9",
-    "mini-css-extract-plugin": "^2.7.6",
     "node-sass": "^9.0.0",
     "nodelist-foreach-polyfill": "^1.2.0",
     "normalize-wheel": "^1.0.1",
@@ -74,11 +74,10 @@
     "stats.js": "^0.17.0",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
-    "webpack": "^5.19.0",
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.7.3",
     "whatwg-fetch": "^3.5.0"
   },
   "dependencies": {
@@ -95,8 +94,13 @@
     "prismic-dom": "^2.2.4",
     "prismic-javascript": "^3.0.2",
     "pug": "^3.0.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "webpack-merge": "^5.7.3",
     "request": "^2.88.2",
     "staticify": "^5.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack": "^5.19.0",
     "ua-parser-js": "^0.7.23"
   }
 }

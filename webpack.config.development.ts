@@ -1,7 +1,6 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-
-const config = require('./webpack.config');
+import path from 'path';
+import { merge } from 'webpack-merge';
+import config from './webpack.config';
 
 const devConfig = {
 
@@ -20,4 +19,4 @@ const devConfig = {
   },
 };
 
-module.exports = merge([config, devConfig]);
+export default merge([config, devConfig]);

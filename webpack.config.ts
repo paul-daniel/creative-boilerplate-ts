@@ -1,8 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import CopyPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev';
 
@@ -11,7 +10,7 @@ const dirAssets = path.join(__dirname, 'assets');
 const dirStyles = path.join(__dirname, 'styles');
 const dirNode = 'node_modules';
 
-module.exports = {
+const config : webpack.Configuration = {
   entry: {
     main: [path.join(dirApp, 'index.ts'), path.join(dirStyles, 'index.scss')],
     'service-worker': path.join(dirApp, 'service-worker.ts'),
@@ -30,7 +29,7 @@ module.exports = {
       IS_DEVELOPMENT,
     }),
 
-    new CopyWebpackPlugin({
+    new CopyPlugin({
       patterns: [
         {
           from: './offline.html',
@@ -123,3 +122,5 @@ module.exports = {
     ],
   },
 };
+
+export default config;
