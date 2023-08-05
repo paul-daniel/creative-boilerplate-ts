@@ -1,6 +1,12 @@
 import path from 'path';
 import { merge } from 'webpack-merge';
+import { HotModuleReplacementPlugin } from 'webpack';
+import dotenv from 'dotenv';
 import config from './webpack.config';
+
+dotenv.config();
+
+const PORT = process.env.PORT_WEBPACK || 3002;
 
 const devConfig = {
 
@@ -9,14 +15,22 @@ const devConfig = {
   devtool: 'inline-source-map',
 
   devServer: {
+    contentBase: path.join(__dirname, 'dist'),
     writeToDisk: true,
-    port: 3000,
+    port: PORT,
+    hot: true,
+    watchContentBase: true,
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
+
+  plugins: [
+    // ...other plugins...
+    new HotModuleReplacementPlugin(),
+  ],
 };
 
 export default merge([config, devConfig]);
